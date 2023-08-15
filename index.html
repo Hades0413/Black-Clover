@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <!--hades0413-->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plutón</title>
     <link rel="stylesheet" href="estilos.css">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
+
 <body>
     <header>
         <a href="#" class="logo"><img src="logo.png"></a>
@@ -43,30 +45,47 @@
                 parece ser la única persona en el mundo que no posee capacidad
                 mágica alguna. Eso no importará a los dos jóvenes, que aspirarán a
                 alcanzar el puesto de Rey Mago, el mejor mago de todos. Pero para ello
-                tendrán que ser seleccionados primero por una Orden de Caballeros 
+                tendrán que ser seleccionados primero por una Orden de Caballeros
                 Mágicos, ¡y Asta no tiene magia!
             </p>
-        
-        <div class="botones">
-            <a href="#"><i class="fa fa-play" aria-hidden="true"></i>Play</a>
-            <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Mi Lista</a>
+
+            <div class="botones">
+                <a href="#"><i class="fa fa-play" aria-hidden="true"></i>Play</a>
+                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Mi Lista</a>
+            </div>
         </div>
-    </div>
-    <a class="play" onclick="toggleVideo();"><img src="play.png">VER EL TRAILER</a>
+        <a class="play" onclick="toggleVideo(true);"><img src="play.png">VER EL TRAILER</a>
     </div>
 
     <div class="trailer">
-        <video src="trailer.mp4" controls="true" autoplay="true"></video>
-        <img src="close.png" class="close" onclick="toggleVideo();">
+        <video src="trailer.mp4" controls="true"></video>
+        <img src="close.png" class="close" onclick="toggleVideo(false);">
     </div>
-    
-    
-</body>
-</html>
 
-<script>
-    function toggleVideo(){
-    const trailer = document.querySelector('.trailer')
-    trailer.classList.toggle('active');
-    }
-</script>
+    <script>
+        let videoPlaying = false;
+
+        function toggleVideo(play) {
+            const trailer = document.querySelector('.trailer');
+            const video = trailer.querySelector('video');
+
+            if (play) {
+                video.play();
+                videoPlaying = true;
+            } else {
+                video.pause();
+                videoPlaying = false;
+            }
+
+            trailer.classList.toggle('active');
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && videoPlaying) {
+                toggleVideo(false);
+            }
+        });
+    </script>
+</body>
+
+</html>
